@@ -83,6 +83,8 @@ prioridade sobre o embutido.
 
 ## Django
 
+Suporta Django 4.2 a 6.1 (Python 3.10 a 3.14; Django 6.x exige Python 3.12+).
+
 ```python
 INSTALLED_APPS = [..., "brfiscal.contrib.django"]
 ```
