@@ -1,3 +1,5 @@
+from typing import Any
+
 from django.db import models
 
 from .validators import validar_cest, validar_ncm
@@ -8,12 +10,12 @@ class NcmField(models.CharField):
 
     default_validators = [validar_ncm]
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
         kwargs.setdefault("max_length", 8)
         kwargs.setdefault("verbose_name", "NCM")
         super().__init__(*args, **kwargs)
 
-    def to_python(self, value):
+    def to_python(self, value: Any) -> str | None:
         value = super().to_python(value)
         return "".join(c for c in value if c.isdigit()) if value else value
 
@@ -21,11 +23,11 @@ class NcmField(models.CharField):
 class CestField(models.CharField):
     default_validators = [validar_cest]
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
         kwargs.setdefault("max_length", 7)
         kwargs.setdefault("verbose_name", "CEST")
         super().__init__(*args, **kwargs)
 
-    def to_python(self, value):
+    def to_python(self, value: Any) -> str | None:
         value = super().to_python(value)
         return "".join(c for c in value if c.isdigit()) if value else value

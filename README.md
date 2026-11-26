@@ -4,8 +4,7 @@ Tabelas fiscais brasileiras para Python, com **espelho local versionado** das fo
 oficiais, **busca por descrição** e **validação**. Funciona em qualquer projeto Python;
 a integração com Django é opcional.
 
-> Status: alpha (0.1). NCM completa e embutida; CEST com estrutura pronta, carga dos
-> anexos do Convênio ICMS 142/2018 em andamento. Outras tabelas (CFOP, CST/CSOSN,
+> Status: alpha (0.1). NCM e CEST embutidas. Outras tabelas (CFOP, CST/CSOSN,
 > natureza da receita PIS/COFINS, cClassTrib IBS/CBS…) estão no roadmap.
 
 ## Por que
@@ -62,6 +61,7 @@ Para atualizar sem esperar uma nova versão:
 ```bash
 export BRFISCAL_DADOS=/var/lib/brfiscal
 brfiscal atualizar ncm      # baixa do Portal Único Siscomex
+brfiscal atualizar cest     # lê a página do Convênio ICMS 142/2018 no Confaz
 brfiscal info               # mostra vigência de cada tabela
 brfiscal buscar ncm "papel higienico"
 ```
@@ -83,7 +83,7 @@ INSTALLED_APPS = [..., "brfiscal.contrib.django"]
 ```bash
 python manage.py migrate
 python manage.py brfiscal_carregar            # carrega NCM e CEST do espelho no banco
-python manage.py brfiscal_carregar --baixar   # baixa a NCM vigente antes de carregar
+python manage.py brfiscal_carregar --baixar   # baixa NCM e CEST vigentes antes de carregar
 ```
 
 Models: `Ncm`, `Cest`, `CestNcm` (NCMs/prefixos de cada CEST) e `VersaoTabela`.
@@ -106,7 +106,7 @@ class Produto(models.Model):
 ## Roadmap
 
 - [x] NCM com hierarquia, descrição completa e vigência
-- [ ] CEST: importação dos anexos do Convênio 142/2018
+- [x] CEST: importação dos anexos II a XXVI do Convênio 142/2018
 - [ ] CFOP, com conversão saída → entrada (5102 → 1102)
 - [ ] CST/CSOSN de ICMS, CST de PIS/COFINS e IPI
 - [ ] Natureza da receita PIS/COFINS (tabelas 4.3.x do SPED), ligada ao NCM

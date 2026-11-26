@@ -34,10 +34,11 @@ def _atualizar(args: argparse.Namespace) -> int:
     else:
         from .fontes import cest as fonte_cest
 
-        if not args.origem:
-            print("CEST: informe --origem com o CSV dos anexos do Conv. 142/2018.", file=sys.stderr)
-            return 2
-        arquivo = fonte_cest.atualizar_de_csv(destino, Path(args.origem))
+        origem = Path(args.origem) if args.origem else None
+        if origem and origem.suffix.lower() == ".csv":
+            arquivo = fonte_cest.atualizar_de_csv(destino, origem)
+        else:
+            arquivo = fonte_cest.atualizar(destino, origem)
     print(f"Gravado {arquivo}")
     return 0
 
