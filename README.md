@@ -1,5 +1,7 @@
 # brfiscal
 
+[![Python](https://img.shields.io/pypi/pyversions/brfiscal.svg)](https://pypi.org/project/brfiscal/) [![PyPI Version](https://img.shields.io/pypi/v/brfiscal.svg)](https://pypi.org/project/brfiscal/) [![PyPI License](https://img.shields.io/pypi/l/brfiscal.svg)](https://pypi.org/project/brfiscal/) [![GitHub Actions Status](https://github.com/rhenter/brfiscal/actions/workflows/ci.yml/badge.svg)](https://github.com/rhenter/brfiscal/actions/workflows/ci.yml) [![Coverage](https://codecov.io/gh/rhenter/brfiscal/branch/main/graph/badge.svg)](https://codecov.io/gh/rhenter/brfiscal) [![Open Source? Yes!](https://badgen.net/badge/Open%20Source%3F/Yes%21/blue)](https://github.com/rhenter/brfiscal)
+
 Tabelas fiscais brasileiras para Python, com **espelho local versionado** das fontes
 oficiais, **busca por descrição** e **validação**. Funciona em qualquer projeto Python;
 a integração com Django é opcional.

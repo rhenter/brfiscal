@@ -1,6 +1,6 @@
 TWINE_REPOSITORY ?= pypi
 
-.PHONY: clean clean-build deps lint format test build check-dist publish release version
+.PHONY: clean clean-build deps lint format test coverage build check-dist publish release version
 
 clean: clean-build
 	@find . -iname '*.pyc' -delete
@@ -23,6 +23,9 @@ format:
 
 test:
 	uv run pytest
+
+coverage:
+	uv run pytest --cov --cov-report=term-missing
 
 version:
 	@uv run python setup.py -q version
