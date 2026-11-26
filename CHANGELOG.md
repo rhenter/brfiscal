@@ -2,8 +2,6 @@
 
 ## 0.1.0
 
-Ainda não publicada.
-
 - NCM: espelho da tabela vigente (Res. Gecex nº 926/2026, vigente em 26/11/2026), validação,
   formatação, hierarquia, descrição completa e busca por descrição com sinônimos.
 - CEST: importação dos anexos do Convênio ICMS 142/2018 direto da página do Confaz
