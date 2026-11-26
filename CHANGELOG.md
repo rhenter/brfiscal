@@ -2,7 +2,7 @@
 
 ## 0.1.0
 
-Ainda não publicada.
+Publicada em 26/11/2026.
 
 - NCM: espelho da tabela vigente (Res. Gecex nº 926/2026, vigente em 26/11/2026), validação,
   formatação, hierarquia, descrição completa e busca por descrição com sinônimos.
