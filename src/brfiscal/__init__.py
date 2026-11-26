@@ -3,10 +3,16 @@
 Tabelas disponíveis: :mod:`brfiscal.ncm`, :mod:`brfiscal.cest`.
 """
 
+from importlib.metadata import PackageNotFoundError
+from importlib.metadata import version as _version
+
 from . import cest, ncm
 from ._tabela import DadosIndisponiveis, Metadados, Resultado, configurar
 
-__version__ = "0.1.0.dev0"
+try:
+    __version__ = _version("brfiscal")
+except PackageNotFoundError:  # rodando direto do código-fonte, sem instalar
+    __version__ = "0.0.0"
 
 __all__ = [
     "DadosIndisponiveis",

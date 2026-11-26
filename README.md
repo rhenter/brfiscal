@@ -124,10 +124,13 @@ class Produto(models.Model):
 O projeto usa [uv](https://docs.astral.sh/uv/):
 
 ```bash
-uv sync                 # cria o .venv com as dependências de desenvolvimento
-uv run pytest
-uv run ruff check src tests
+make deps      # uv sync: cria o .venv com as dependências de desenvolvimento
+make test      # pytest
+make lint      # ruff
+make release   # build, twine check, tag com a versão do CHANGELOG.md e upload no PyPI
 ```
+
+A versão do pacote vem do primeiro `## X.Y.Z` do `CHANGELOG.md` (`make version` mostra).
 
 Veja [CONTRIBUTING.md](CONTRIBUTING.md).
 
