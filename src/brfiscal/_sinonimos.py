@@ -1,0 +1,63 @@
+"""Sinônimos para aproximar o nome comercial do produto do texto da NCM.
+
+O texto oficial da NCM é técnico ("águas gaseificadas adicionadas de açúcar") e o
+nome no cadastro é comercial ("refrigerante"). Esta lista é um ponto de partida,
+focado em varejo alimentar; contribuições são bem-vindas (veja CONTRIBUTING.md).
+
+Chave: termo como o usuário escreve (sem acento, minúsculo).
+Valor: palavras que aparecem no texto oficial da NCM.
+"""
+
+NCM: dict[str, str] = {
+    "refrigerante": "aguas gaseificadas adicionadas acucar aromatizadas",
+    "refri": "aguas gaseificadas adicionadas acucar aromatizadas",
+    "suco": "sucos frutas",
+    "leite condensado": "leite concentrados adicionados acucar",
+    "arroz branco": "arroz branqueado polido",
+    "sabao po": "preparacoes lavagem",
+    "lava roupa": "preparacoes lavagem",
+    "mussarela": "queijos frescos",
+    "muçarela": "queijos frescos",
+    "requeijao": "queijos fundidos",
+    "iogurte": "iogurte leitelho fermentados",
+    "sabao": "saboes",
+    "detergente": "agentes organicos superficie preparacoes tensoativas",
+    "amaciante": "preparacoes amaciamento",
+    "biscoito": "bolachas biscoitos",
+    "bolacha": "bolachas biscoitos",
+    "recheado": "bolachas biscoitos",
+    "salgadinho": "produtos obtidos expansao torrefacao",
+    "macarrao": "massas alimenticias",
+    "miojo": "massas alimenticias",
+    "cafe": "cafe torrado",
+    "achocolatado": "preparacoes contendo cacau",
+    "margarina": "margarina",
+    "manteiga": "manteiga",
+    "salsicha": "enchidos",
+    "linguica": "enchidos",
+    "mortadela": "enchidos",
+    "presunto": "pernas pas pedacos",
+    "frango": "galos galinhas",
+    "carne": "carnes bovinos",
+    "alcatra": "carnes bovinos desossadas",
+    "picanha": "carnes bovinos desossadas",
+    "fralda": "fraldas",
+    "absorvente": "absorventes",
+    "shampoo": "xampus",
+    "xampu": "xampus",
+    "desodorante": "desodorantes",
+    "creme dental": "dentifricios",
+    "pasta dental": "dentifricios",
+    "pao": "paes",
+    "cerveja": "cervejas malte",
+    "vinho": "vinhos uvas frescas",
+    "cachaca": "cachaca",
+    "agua mineral": "aguas minerais",
+    "oleo": "oleo",
+    "azeite": "azeite oliva",
+    "acucar": "acucar cana",
+    "sal": "sal",
+    "farinha": "farinhas",
+    "fuba": "farinha milho",
+    "racao": "preparacoes utilizadas alimentacao animais",
+}

@@ -1,0 +1,58 @@
+[build-system]
+requires = ["hatchling>=1.24"]
+build-backend = "hatchling.build"
+
+[project]
+name = "brfiscal"
+version = "0.1.0.dev0"
+description = "Tabelas fiscais brasileiras (NCM, CEST, CFOP, CST e outras) com espelho local versionado, busca por descrição e validação."
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+requires-python = ">=3.10"
+authors = [{ name = "Rafael Henter" }]
+keywords = ["ncm", "cest", "nfe", "fiscal", "brasil", "receita federal", "django"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Framework :: Django",
+    "Intended Audience :: Developers",
+    "Natural Language :: Portuguese (Brazilian)",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Topic :: Office/Business :: Financial :: Accounting",
+]
+dependencies = []
+
+[project.optional-dependencies]
+django = ["Django>=4.2"]
+
+[project.scripts]
+brfiscal = "brfiscal.__main__:main"
+
+[project.urls]
+Repository = "https://github.com/rhenter/brfiscal"
+Issues = "https://github.com/rhenter/brfiscal/issues"
+
+[dependency-groups]
+dev = ["pytest>=8", "pytest-django>=4.8", "Django>=4.2", "ruff>=0.6"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/brfiscal"]
+
+[tool.hatch.build.targets.sdist]
+include = ["src", "tests", "README.md", "LICENSE", "CHANGELOG.md"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+DJANGO_SETTINGS_MODULE = "tests.django_settings"
+django_find_project = false
+pythonpath = [".", "src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
