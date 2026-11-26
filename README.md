@@ -18,8 +18,13 @@ para validar e sugerir códigos.
 ## Instalação
 
 ```bash
-pip install brfiscal            # só Python
-pip install "brfiscal[django]"  # com a app Django
+# com uv
+uv add brfiscal              # só Python
+uv add "brfiscal[django]"    # com a app Django
+
+# com pip
+pip install brfiscal
+pip install "brfiscal[django]"
 ```
 
 ## Uso
@@ -116,10 +121,12 @@ class Produto(models.Model):
 
 ## Desenvolvimento
 
+O projeto usa [uv](https://docs.astral.sh/uv/):
+
 ```bash
-pip install -e . pytest pytest-django django ruff
-pytest
-ruff check src tests
+uv sync                 # cria o .venv com as dependências de desenvolvimento
+uv run pytest
+uv run ruff check src tests
 ```
 
 Veja [CONTRIBUTING.md](CONTRIBUTING.md).

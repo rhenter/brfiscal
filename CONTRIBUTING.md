@@ -12,6 +12,6 @@ Obrigado por ajudar! Algumas regras para manter a lib confiável:
 4. Nada de regra tributária de empresa específica (alíquotas, regimes, exceções).
 
 ```bash
-pip install -e . pytest pytest-django django ruff
-pytest && ruff check src tests && ruff format --check src tests
+uv sync
+uv run pytest && uv run ruff check src tests && uv run ruff format --check src tests
 ```

@@ -14,17 +14,17 @@ jobs:
         django: ["4.2", "5.2"]
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: astral-sh/setup-uv@v6
         with:
           python-version: ${{ matrix.python }}
-      - run: pip install -e . pytest pytest-django "django~=${{ matrix.django }}.0" ruff
-      - run: ruff check src tests && ruff format --check src tests
-      - run: pytest
+      - run: uv sync --locked
+      - run: uv pip install "django~=${{ matrix.django }}.0"
+      - run: uv run --no-sync ruff check src tests
+      - run: uv run --no-sync ruff format --check src tests
+      - run: uv run --no-sync pytest
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.13"
-      - run: pip install build && python -m build
+      - uses: astral-sh/setup-uv@v6
+      - run: uv build
