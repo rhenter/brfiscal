@@ -4,6 +4,10 @@ on:
   push:
     branches: [main]
   pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
 
 jobs:
   test:
@@ -17,20 +21,53 @@ jobs:
       - uses: astral-sh/setup-uv@v6
         with:
           python-version: ${{ matrix.python }}
+          enable-cache: true
       - run: uv sync --locked
       - run: uv pip install "django~=${{ matrix.django }}.0"
       - run: uv run --no-sync ruff check src tests
       - run: uv run --no-sync ruff format --check src tests
-      - run: uv run --no-sync pytest --cov --cov-report=xml
-      - uses: codecov/codecov-action@v5
-        if: matrix.python == '3.13' && matrix.django == '5.2'
+      - run: uv run --no-sync pytest
+
+  coverage:
+    # Gera o badge de cobertura no próprio Actions e publica no branch "badges".
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
         with:
-          files: coverage.xml
-          token: ${{ secrets.CODECOV_TOKEN }}
-          fail_ci_if_error: false
+          python-version: "3.13"
+          enable-cache: true
+      - run: uv sync --locked
+      - name: Run tests with coverage
+        run: |
+          uv run --no-sync pytest --cov --cov-report=xml --cov-report=term
+          uv run --no-sync coverage report --format=markdown >> "$GITHUB_STEP_SUMMARY"
+      - name: Generate badge
+        run: uvx --from "genbadge[coverage]" genbadge coverage -i coverage.xml -o coverage.svg
+      - name: Publish badge
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          mv coverage.svg /tmp/coverage.svg
+          git fetch origin badges || true
+          if git rev-parse --verify origin/badges >/dev/null 2>&1; then
+            git switch badges
+          else
+            git switch --orphan badges
+            git rm -rf --quiet . || true
+          fi
+          cp /tmp/coverage.svg coverage.svg
+          git add coverage.svg
+          git diff --cached --quiet || git commit -m "Atualiza badge de cobertura"
+          git push origin badges
+
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: astral-sh/setup-uv@v6
       - run: uv build
+      - run: uvx twine check dist/*
